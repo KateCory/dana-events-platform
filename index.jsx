@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import Home from "./src/Pages/Home"
 import Events from './src/Pages/Events';
+import EventDetail from './src/Pages/EventDetail';
 import CustomerLogin from './src/Pages/Customers/CustomerLogin'
 import StaffLogin from './src/Pages/Staff/StaffLogin';
+import Booking from './src/Pages/Customers/Booking';
 import Layout from "./src/Components/Layout"
 import './index.css'
 
@@ -15,6 +17,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/event/:id" element={<EventDetail />} />
+          <Route path="/booking" element={<Booking />} />
           <Route 
             path="/customerlogin" 
             element={<CustomerLogin />} />

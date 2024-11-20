@@ -4,7 +4,7 @@ import {
   getFirestore,
   collection,
   //doc,
-  //getDoc,
+  getDoc,
   getDocs,
   //query,
   //where,
@@ -24,6 +24,7 @@ const db = getFirestore(app);
 
 
 const auth = getAuth(app);
+console.log(auth)
 
 // const loginEmailPassword = async () => {
 //   const loginEmail = txtEmail.value 
@@ -45,6 +46,16 @@ export async function getEvents() {
   })); 
   console.log(dataArr, ">>> api.js")
   return dataArr; 
+}
+
+export async function getEventDetail(id) {
+  const docRef = doc(db, "events", id)
+  const eventSnapshot = await getDoc(docRef)
+  return {
+    ...eventSnapshot.data(),
+    id: eventSnapshot.id
+  }
+ 
 }
 
 // call to the function called getDocs()
