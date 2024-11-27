@@ -6,6 +6,11 @@
     margin: 0;
 }  
 
+
+main {
+    margin-bottom: 400px;
+}
+
 /* .header {
     height: 70px;
     display: flex;
@@ -96,3 +101,29 @@ footer {
     margin-top: auto;
     font-weight: 500;
 }
+
+/*** EVENTS PAGE ***/
+
+.event-list-container {
+    padding-inline: 23px
+}
+
+.event-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 34px;
+    margin-top: 57px;
+}
+/* 
+.event-info {
+    height: 34px;
+    padding: 6px 26px;
+    font-style: normal;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    background-color: #FFEAD0;
+    color: #4D4D4D;
+    transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
+}  */

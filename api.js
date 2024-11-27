@@ -3,12 +3,13 @@ import { getAuth } from "firebase/auth";
 import {
   getFirestore,
   collection,
-  //doc,
+  doc,
   getDoc,
   getDocs,
   //query,
   //where,
 } from "firebase/firestore/lite";
+import axios from "axios"
 
 const firebaseConfig = {
   apiKey: "AIzaSyDqN92_8VWwYL4yu5Hh1gw1tCMy-CTLVdg",
@@ -24,7 +25,7 @@ const db = getFirestore(app);
 
 
 const auth = getAuth(app);
-console.log(auth)
+
 
 // const loginEmailPassword = async () => {
 //   const loginEmail = txtEmail.value 
@@ -50,12 +51,16 @@ export async function getEvents() {
 
 export async function getEventDetail(id) {
   const docRef = doc(db, "events", id)
+
   const eventSnapshot = await getDoc(docRef)
+  console.log({
+    ...eventSnapshot.data(),
+    id: eventSnapshot.id
+  })
   return {
     ...eventSnapshot.data(),
     id: eventSnapshot.id
   }
- 
 }
 
 // call to the function called getDocs()
@@ -76,5 +81,63 @@ export async function getEventDetail(id) {
 // }
 
 // doc() - get reference to a single document
+
+console.log(axios.get('https://api.lyrics.ovh/v1/oasis/wonderwall'))
+
+// This is because the axios methods return a promise when invokedThis is because the axios methods return a promise when invoked
+
+axios
+  .get('https://api.lyrics.ovh/v1/oasis/wonderwall')
+  .then((response) => {
+    // handle success
+    console.log(response);
+  })
+  .catch((error) => {
+    // handle error
+    console.log(error);
+  })
+
+  // axios
+  //   .get('https://www.eventbrite.com/v3/events//?token=GVEX3J5GVK4GVEQQPR')
+  //   .then((response) => {
+  //     // handle success
+  //     console.log(response);
+  //   })
+  //   .catch((error) => {
+  //     // handle error
+  //     console.log(error);
+  //   })
+
+  // const organizer_id = "85400788973"
+  // const id = "1052628830167"
+
+
+
+  // -H 'Authorization: Bearer PERSONAL_OAUTH_TOKEN' 
+
+  // axios
+  //   .get('https://www.eventbriteapi.com/v3/organizations/85400788973/events/v3/users/me/?token=GVEX3J5GVK4GVEQQPR')
+  //   .then((response) => {
+  //     // handle success
+  //     console.log(response);
+  //   })
+  //   .catch((error) => {
+  //     // handle error
+  //     console.log(error);
+  //   })
+
+const accessToken = "ROURJFYLPLXM5JKCEIYB"
+
+const fetchEvents = async () => {
+  const response = await fetch('https://www.eventbriteapi.com/v3/events/1052628830167', {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  });
+  const events = await response.json();
+  console.log('Events:', events.events);
+}
+
+fetchEvents();
 
 
